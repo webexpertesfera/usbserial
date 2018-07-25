@@ -88,7 +88,6 @@ class UsbSerial extends EventEmitter {
         }
 	  
     iface.claim();
-	  iface.attachKernelDriver();
     let int_ep = find_ep(iface, usb.LIBUSB_TRANSFER_TYPE_INTERRUPT, 'in');
     int_ep.on('data', data => {
       this.emit('status', data);

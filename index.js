@@ -75,6 +75,18 @@ class UsbSerial extends EventEmitter {
     device.open();
     assert(device.interfaces.length === 1);
     let iface = device.interfaces[0];
+	  
+	 if( iface.isKernelDriverActive() ){
+            console.log('Kernal Driver is active, detaching..');
+
+            //detach kernal driver if active
+            iface.detachKernelDriver();
+            console.log("Kernal driver detached");
+
+        }else{
+            console.log('Kernal driver not active');
+        }
+	  
     iface.claim();
     let int_ep = find_ep(iface, usb.LIBUSB_TRANSFER_TYPE_INTERRUPT, 'in');
     int_ep.on('data', data => {

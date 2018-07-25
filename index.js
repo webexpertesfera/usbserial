@@ -107,7 +107,7 @@ class UsbSerial extends EventEmitter {
       .then(() => vendor_write(device, 0, 1))
       .then(() => vendor_write(device, 1, 0))
       .then(() => vendor_write(device, 2, 0x44))
-      .then(() => setBaudrate(device, 75))
+      .then(() => setBaudrate(device, 19200))
       .then(() => in_ep.startPoll())
       .then(() => this.emit('ready'))
       .catch(err => this.emit('error', err));
